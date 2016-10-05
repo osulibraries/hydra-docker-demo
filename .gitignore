@@ -15,3 +15,20 @@
 /log/*
 !/log/.keep
 /tmp
+
+/spec/examples.txt
+.byebug_history
+dump.rdb
+
+# OSX hidden files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows hidden files
+Thumbs.db
+ehthumbs.db
