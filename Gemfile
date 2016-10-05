@@ -27,3 +27,14 @@ group :development do
   gem 'shoulda-matchers', '~> 3.1'
 end
 
+
+group :development, :test do
+  gem 'solr_wrapper', '>= 0.3'
+end
+
+gem 'rsolr', '~> 1.0'
+gem 'devise'
+gem 'devise-guests', '~> 0.3'
+group :development, :test do
+  gem 'fcrepo_wrapper'
+end
