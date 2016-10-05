@@ -31,3 +31,6 @@ ADD Gemfile.lock /hydra-docker-demo/Gemfile.lock
 RUN bundle install
 
 ADD . /hydra-docker-demo
+
+ENTRYPOINT ["/hydra-docker-demo/lib/support/docker/entrypoint.sh"]
+CMD ["rails", "server"]

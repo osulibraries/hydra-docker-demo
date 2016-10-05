@@ -9,11 +9,9 @@ services:
   solr:
     build:
       context: .
-      dockerfile: Dockerfile-solr
+      dockerfile: ./lib/support/docker/Dockerfile-solr
   app:
     build: .
-    environment:
-      - DISABLE_SPRING=1
     command: rails s -p 3000 -b '0.0.0.0'
     volumes:
       - .:/hydra-docker-demo
