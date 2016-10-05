@@ -49,7 +49,7 @@ CurationConcerns.configure do |config|
   # config.display_media_download_link = true
 
   # Specify the path to the file characterization tool:
-  # config.fits_path = "fits.sh"
+  config.fits_path = ENV['FITS_PATH'] || 'fits.sh'
 
   # Specify a date you wish to start collecting Google Analytic statistics for.
   # Leaving it blank will set the start date to when ever the file was uploaded by

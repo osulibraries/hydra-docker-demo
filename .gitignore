@@ -32,3 +32,4 @@ Icon
 # Windows hidden files
 Thumbs.db
 ehthumbs.db
+.env
