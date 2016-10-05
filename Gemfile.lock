@@ -362,6 +362,7 @@ GEM
     os (0.9.6)
     parslet (1.7.1)
       blankslate (>= 2.0, <= 4.0)
+    pg (0.18.4)
     qa (0.8.0)
       activerecord-import
       deprecation
@@ -588,6 +589,7 @@ DEPENDENCIES
   fcrepo_wrapper
   jbuilder (~> 2.0)
   jquery-rails
+  pg
   rails (= 4.2.6)
   rsolr (~> 1.0)
   rspec-rails (~> 3.5)

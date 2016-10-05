@@ -1,0 +1,8 @@
+FROM solr:6.2.1
+
+COPY solr/config /opt/solr/server/solr/hydra/conf/
+
+USER root
+RUN touch /opt/solr/server/solr/hydra/core.properties \
+    && chown -R solr /opt/solr/server/solr/hydra
+USER solr

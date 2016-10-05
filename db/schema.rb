@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20161005001005) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id",       null: false
     t.string   "user_type"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20161005001005) do
     t.datetime "updated_at",    null: false
   end
 
-  add_index "bookmarks", ["document_id"], name: "index_bookmarks_on_document_id"
-  add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id"
+  add_index "bookmarks", ["document_id"], name: "index_bookmarks_on_document_id", using: :btree
+  add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
 
   create_table "checksum_audit_logs", force: :cascade do |t|
     t.string   "file_set_id"
@@ -37,7 +40,7 @@ ActiveRecord::Schema.define(version: 20161005001005) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "checksum_audit_logs", ["file_set_id", "file_id"], name: "by_file_set_id_and_file_id"
+  add_index "checksum_audit_logs", ["file_set_id", "file_id"], name: "by_file_set_id_and_file_id", using: :btree
 
   create_table "curation_concerns_operations", force: :cascade do |t|
     t.string   "status"
@@ -56,10 +59,10 @@ ActiveRecord::Schema.define(version: 20161005001005) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "curation_concerns_operations", ["lft"], name: "index_curation_concerns_operations_on_lft"
-  add_index "curation_concerns_operations", ["parent_id"], name: "index_curation_concerns_operations_on_parent_id"
-  add_index "curation_concerns_operations", ["rgt"], name: "index_curation_concerns_operations_on_rgt"
-  add_index "curation_concerns_operations", ["user_id"], name: "index_curation_concerns_operations_on_user_id"
+  add_index "curation_concerns_operations", ["lft"], name: "index_curation_concerns_operations_on_lft", using: :btree
+  add_index "curation_concerns_operations", ["parent_id"], name: "index_curation_concerns_operations_on_parent_id", using: :btree
+  add_index "curation_concerns_operations", ["rgt"], name: "index_curation_concerns_operations_on_rgt", using: :btree
+  add_index "curation_concerns_operations", ["user_id"], name: "index_curation_concerns_operations_on_user_id", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.binary   "query_params"
@@ -69,7 +72,7 @@ ActiveRecord::Schema.define(version: 20161005001005) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "searches", ["user_id"], name: "index_searches_on_user_id"
+  add_index "searches", ["user_id"], name: "index_searches_on_user_id", using: :btree
 
   create_table "single_use_links", force: :cascade do |t|
     t.string   "downloadKey"
@@ -96,8 +99,8 @@ ActiveRecord::Schema.define(version: 20161005001005) do
     t.boolean  "guest",                  default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "version_committers", force: :cascade do |t|
     t.string   "obj_id"
@@ -108,4 +111,5 @@ ActiveRecord::Schema.define(version: 20161005001005) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "curation_concerns_operations", "users"
 end
