@@ -1,9 +1,11 @@
 FROM ruby:2.3.1
 
-RUN echo 'deb http://ftp.us.debian.org/debian jessie-backports main' >> /etc/apt/sources.list \
-    && apt-get update && apt-get install -y \
+RUN sed -i 's|http://httpredir.debian.org/debian|http://ftp.us.debian.org/debian|g' /etc/apt/sources.list \
+    && echo 'deb http://ftp.us.debian.org/debian jessie-backports main' >> /etc/apt/sources.list \
+    && apt-get clean && apt-get update && apt-get install -y \
        build-essential \
        ffmpeg \
+       ghostscript \
        imagemagick \
        libpq-dev \
        libqt4-webkit \
@@ -17,8 +19,8 @@ RUN echo 'deb http://ftp.us.debian.org/debian jessie-backports main' >> /etc/apt
        xvfb \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /opt
-RUN wget http://projects.iq.harvard.edu/files/fits/files/fits-0.8.5.zip \
+RUN cd /opt \
+    && wget http://projects.iq.harvard.edu/files/fits/files/fits-0.8.5.zip \
     && unzip fits-0.8.5.zip \
     && rm -rf fits-0.8.4 fits-0.8.5.zip \
     && chmod a+x fits-0.8.5/fits.sh
