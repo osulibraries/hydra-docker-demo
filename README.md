@@ -12,7 +12,7 @@ Build the application images with:
 
 Then fetch additional images and start the application:
 
-    $ dpcker-compose up
+    $ docker-compose up
 
 Once all services are running, update the database schema:
 
