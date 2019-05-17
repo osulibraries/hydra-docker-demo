@@ -1,8 +1,13 @@
 FROM ruby:2.3.1
+RUN printf "deb http://archive.debian.org/debian/ jessie main\n" > /etc/apt/sources.list
+RUN printf "deb-src http://archive.debian.org/debian/ jessie main\n" >> /etc/apt/sources.list
+RUN printf "deb http://security.debian.org jessie/updates main\n" >> /etc/apt/sources.list
+RUN printf "deb-src http://security.debian.org jessie/updates main\n" >> /etc/apt/sources.list
+RUN cat /etc/apt/sources.list
 
 RUN sed -i 's|http://httpredir.debian.org/debian|http://ftp.us.debian.org/debian|g' /etc/apt/sources.list \
-    && echo 'deb http://ftp.us.debian.org/debian jessie-backports main' >> /etc/apt/sources.list \
-    && apt-get clean && apt-get update && apt-get install -y \
+    && echo 'deb http://archive.debian.org/debian jessie-backports main' >> /etc/apt/sources.list \
+    && apt-get clean && apt-get -o Acquire::Check-Valid-Until=false update && apt-get install -y \
        build-essential \
        ffmpeg \
        ghostscript \
